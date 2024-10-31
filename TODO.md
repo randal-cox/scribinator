@@ -29,7 +29,7 @@
 
 # Marketing
 - new name: scribinator
-- LICENSE and VERSION
+- VERSION
 - github publications
 - talk to the team
 - John
