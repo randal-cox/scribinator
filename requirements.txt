@@ -1,3 +1,5 @@
+pytest
+
 project-version
 python-dotenv
 

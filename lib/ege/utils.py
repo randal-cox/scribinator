@@ -1,5 +1,5 @@
 import pprint, datetime, shutil, os
-from typing import List, Any, Union
+from typing import List, Any, Union, Optional
 
 def format_elapsed_time(secs: Union[int, float]) -> str:
   """Standard way to format elapsed time"""
@@ -14,7 +14,7 @@ def format_elapsed_time(secs: Union[int, float]) -> str:
   ret = ' '.join(f"{int(r[0])}{r[1]}" for r in ret[idx:])
   return ret
 
-def pp(*args: Union[Any, ...], as_string: bool = False) -> str:
+def pp(*args: Union[Any, ...], as_string: bool = False) -> Optional[str]:
   """
     Convenience method to pretty print stuff. Just say
       pp(args)
@@ -52,6 +52,8 @@ def remove_extension(path):
   return os.path.splitext(path)[0]
 
 def greek_letters(num: int) -> str:
+  """Simple converter of integers to greek letter names - useful for some default names"""
+
   greek_alphabet = ["alpha", "beta", "gamma", "delta", "epsilon", "zeta",
                     "eta", "theta", "iota", "kappa", "lambda", "mu",
                     "nu", "xi", "omicron", "pi", "rho", "sigma",
