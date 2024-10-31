@@ -2,6 +2,6 @@ venv
 .env
 .idea
 audio/*
-lib/transcribe/http/segments
-lib/transcribe/http/segments.json
-lib/transcribe/http/cache.js
+lib/scribinator/transcribe/http/segments
+lib/scribinator/transcribe/http/segments.json
+lib/scribinator/transcribe/http/cache.js

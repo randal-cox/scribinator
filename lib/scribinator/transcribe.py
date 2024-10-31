@@ -1,13 +1,13 @@
 #!env/bin/python3
 import json, os, warnings, shutil, datetime, subprocess, platform
 from io import BytesIO
-from typing import Dict, Any
+from typing import Dict
 
 from pydub import AudioSegment
 import torch, torchaudio
 
-from logging_setup import setup_logging
-from utils import pp, format_elapsed_time, recursive_copy, remove_extension
+from ege.logging_setup import setup_logging
+from ege.utils import format_elapsed_time, recursive_copy, remove_extension, greek_letters
 
 class Transcription:
   """
@@ -128,7 +128,8 @@ class Transcription:
 
       # Apply diarization to the audio file to get speakers
       # I cannot set weights_only=True in torchaudio, so just supress this warning for now
-      with self.logger.indent("Calling speakers - this may take a while for large files", True):
+      with self.logger.indent("Calling speakers", True):
+        self.logger.info("NB: this may take a while for large files")
         warnings.filterwarnings(action='ignore', message='You are using `torch.load`')
         waveform, sample_rate = torchaudio.load(self.paths['audio']) #, weights_only=True)
         diarization = pipeline({
@@ -353,7 +354,9 @@ class Transcription:
     This file has a dictionary of the results of all analysis we have done
     """
     s = self.info['speakers_segments'] = [s['speaker'] for s in self.segments]
-    self.info['speakers_all'] = sorted(list(set(s)))
+    s = sorted(list(set(s)))
+    s = [greek_letters(v) for v in s]
+    self.info['speakers_all'] = s
     self.info['segments'] = self.segments
     js = 'document.transcriptionator = {};\n'
     js += 'document.transcriptionator.results = '

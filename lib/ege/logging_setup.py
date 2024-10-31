@@ -2,7 +2,7 @@ import logging, os, sys, time, inspect, datetime
 from contextlib import contextmanager
 from functools import lru_cache
 
-from utils import format_elapsed_time
+from .utils import format_elapsed_time
 
 def human_time(seconds):
     days, seconds = divmod(seconds, 86400)

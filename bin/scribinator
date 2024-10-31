@@ -1,16 +1,13 @@
 #!./venv/bin/python3
-import argparse
-import sys
+import argparse, sys, time, os
 import logging
-import time
-import os
 from dotenv import load_dotenv
 
 # 1) Add lib directory to the Python path
 sys.path.append(os.path.abspath('lib'))
 
-from logging_setup import setup_logging
-from transcribe import Transcription
+from ege.logging_setup import setup_logging
+from scribinator.transcribe import Transcription
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Audio processing for speaker diarization.")

@@ -50,3 +50,11 @@ def recursive_copy(src_dir: str, dst_dir: str, ignore_items: List[str]) -> None:
 def remove_extension(path):
   """I remove the extension of a file so often, I wanted a convenience method"""
   return os.path.splitext(path)[0]
+
+def greek_letters(num: int) -> str:
+  greek_alphabet = ["alpha", "beta", "gamma", "delta", "epsilon", "zeta",
+                    "eta", "theta", "iota", "kappa", "lambda", "mu",
+                    "nu", "xi", "omicron", "pi", "rho", "sigma",
+                    "tau", "upsilon", "phi", "chi", "psi", "omega"]
+  quotient, remainder = divmod(num, len(greek_alphabet))
+  return greek_alphabet[remainder] + (str(quotient) if quotient > 0 else "")
