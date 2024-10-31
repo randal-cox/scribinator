@@ -1,25 +1,129 @@
 #!/usr/bin/env bash
 # setup the virtual environment
 
-# should maybe just use python3 and hope it works...
-# or take it as the first argument like 3.11 and default to noda
-echo "Upgrade pip"
-python3.11 -m pip -q install pip --upgrade
+function install_venv() {
+  # should maybe just use python3 and hope it works...
+  # or take it as the first argument like 3.11 and default to noda
+  echo "==> Upgrading:    pip"
+  python3.11 -m pip -q install pip --upgrade
 
-echo "Install virtualenv"
-python3.11 -m pip -q install virtualenv
+  echo "==> Installing:   virtualenv"
+  python3.11 -m pip -q install virtualenv
 
-echo "Create venv"
-python3.11 -m virtualenv -q venv
-source venv/bin/activate
+  echo "==> Creating:     venv"
+  python3.11 -m virtualenv -q venv
+  source venv/bin/activate
 
-echo "Install requirements"
-./venv/bin/pip3.11 install -q -r requirements.txt --quiet
+  echo "==> Installing:   requirements"
+  ./venv/bin/pip3.11 install -q -r requirements.txt --quiet
+}
 
-# if .env is not present,
-# get HUGGINGFACE_TOKEN=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
-# install in .env
+function get_hf_token() {
+    while IFS= read -r line; do
+        if [[ $line == HUGGINGFACE_TOKEN=* ]]; then
+            token="${line#*=}"
+            echo "$token"
+            break
+        fi
+    done < .env
+}
+function install_env() {
+  if [ -f ".env" ]; then
+    HF=`get_hf_token`
+    echo "==> Hugging Face: check token"
+    echo "    Your token is below. If this is wrong, edit it in .env"
+    echo "    '${HF}'"
+  else
+    echo "==> Hugging Face: get token"
+    echo "      Type you Hugging Face token. If you don't have it, yet, hit return and edit .env later"
+    read HF
+    if [[ ${HF} == hf_* ]] && [[ ${#HF} -eq 38 ]]; then
+      echo "HUGGINGFACE_TOKEN=${HF}" > .env
+      echo "    saved to .env"
+    else
+        echo "==> Hugging Face: bad or no token"
+        echo "    Get an account at https://huggingface.co"
+        echo "    Get a token at https://huggingface.co/docs/hub/en/security-tokens"
+        exit
+    fi
+  fi
+}
 
-# prompt to install ffmpeg
+# functions to install ffmpeg on various platforms
+function install_ffmpeg_linux() {
+  echo "==> Installing: ffmpeg"
+  echo "==> ### You will be asked for your password to run apt"
+  sudo apt update
+  sudo apt upgrade
+  sudo apt install ffmpeg
+}
+function install_ffmpeg_macos() {
+  if type -P brew > /dev/null
+  then
+    echo "Installing ffmpeg"
+    brew install ffmpeg
+  else
+    echo "You need homebrew installed to install ffmpeg. Should I install Homebrew (Yes or anything else for no)"
+    read ANS
+    if [[ "$ANS" == "Yes" ]]; then
+      echo "Installing homebrew"
+      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+      echo "Installing ffmpeg"
+      brew install ffmpeg
+    else
+      echo "You will need to install ffmpeg on your own"
+    fi
+  fi
+}
+function install_ffmpeg_cygwin() {
+    install_ffmpeg_other
+}
+function install_ffmpeg_msys() {
+    install_ffmpeg_other
+}
+function install_ffmpeg_win32n() {
+    install_ffmpeg_other
+}
+function install_ffmpeg_other() {
+    echo "==> Download and install ffmpeg from here"
+    echo "    https://www.ffmpeg.org/download.html#build-windows"
+    echo "==> Then rerun ./bin/setup"
+}
+function install_ffmpeg() {
+  if type -P ffmpeg > /dev/null
+  then
+    echo "==> Checking:     ffmpeg"
+  else
+    echo "==> Checking:     ffmpeg is NOT installed"
+    if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+      install_ffmpeg_linux
+    elif [[ "$OSTYPE" == "darwin"* ]]; then
+      install_ffmpeg_macos
+    elif [[ "$OSTYPE" == "cygwin" ]]; then
+      install_ffmpeg_cygwin
+    elif [[ "$OSTYPE" == "msys" ]]; then
+      install_ffmpeg_msys
+    elif [[ "$OSTYPE" == "win32" ]]; then
+      install_ffmpeg_win32
+    else
+      install_ffmpeg_other
+    fi
+  fi
+}
 
-# run tests
+echo
+echo "=============================="
+echo "= Setting up for scribinator ="
+echo "=============================="
+install_env
+install_ffmpeg
+install_venv
+
+echo
+echo "=============================="
+echo "= Next Steps                 ="
+echo "=============================="
+echo "==> Run this to download models"
+echo "    ./bin/models"
+echo "==> Run this to transcribe an audio file"
+echo "    ./bin/scribinator <audio_file>"

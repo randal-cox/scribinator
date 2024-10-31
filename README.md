@@ -12,11 +12,40 @@ gives you playback of the entire audio as well as the clips of each
 speaker's turn speaking. 
 
 # Installation
-- clone repo
-- install ffmpeg
-- ./bin/setup
+### Clone the repo
+- `git clone https://github.com/randal-cox/scribinator`
 
-# Running transcriptionator
+### Get the Prerequisites
+#### Hugging Face
+You will need a token from Hugging Face to get access to models.
+Register here
+- https://huggingface.co
+
+Then follow these instructions to get a token
+- https://huggingface.co/docs/hub/en/security-tokens
+
+This token is used strictly to get the models needed for running
+scribinator.
+
+#### ffmpeg
+Scribinator requires ffmpeg. Hints on how to install are at
+- https://www.hostinger.com/tutorials/how-to-install-ffmpeg
+
+### Setup
+When done, you can finish the setup 
+- `cd scribinator`
+- `./bin/setup`
+
+### Downloading models
+Scribinator requires local copies of several models for identifying
+speakers, transcribing audio to text, and for assigning emotion to
+text/audio. To install this, type
+- `./bin/models`
+
+This will be the only time you need network connectivity. The models will be
+stored locally in models in this project directory
+
+# Running scribinator
 ## Command line
 transcriptionator is launched by the command-line. Assuming you
 have followed the instructions in Installation, open your terminal 
@@ -50,7 +79,7 @@ log messages for feedback.
 
 ## Editing Results
 When the analysis is finished, transcriptionator will open the results 
-in your local web browser. Alternatively, you can always double click
+in your local web browser. Alternatively, you can always double-click
 the index.html file in that directory to open the UI in a web browser.
 
 In your local browser, you can freely edit meta information, who is speaking,
@@ -59,7 +88,10 @@ the bottom of the page to save the final transcript.
 
 If you want to save a partial result so that you can return to editing later, 
 you can export a special file (cache.js) that you place in the root of the 
-output results directory. When you load 
+output results directory. 
+
+===> more coming soon about the editor
+
 
 ## Security
 During annotation and editing, no access to the network is required. 
@@ -69,4 +101,4 @@ computer). For added security, you could disconnect your network while
 annotating transcripts, securely zip the results, then reconnect your
 network.
 
-## Speek
+Exception: models command
