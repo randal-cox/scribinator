@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   version="1.1"
+   id="svg182"
+   width="1024"
+   height="1024"
+   viewBox="0 0 1024 1024"
+   sodipodi:docname="title.svg"
+   inkscape:version="1.2.1 (9c6d41e, 2022-07-14)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs186" />
+  <sodipodi:namedview
+     id="namedview184"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="1.0283203"
+     inkscape:cx="97.732195"
+     inkscape:cy="474.07408"
+     inkscape:current-layer="g188" />
+  <g
+     inkscape:groupmode="layer"
+     inkscape:label="Image"
+     id="g188">
+    <text
+       xml:space="preserve"
+       style="font-size:63.9999px;line-height:1.25;font-family:'Arial Black';-inkscape-font-specification:'Arial Black, Normal';letter-spacing:0px;word-spacing:0px"
+       x="308.92041"
+       y="64.182343"
+       id="text471"><tspan
+         sodipodi:role="line"
+         x="308.92041"
+         y="64.182343"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:63.9999px;font-family:'Coal Train JL';-inkscape-font-specification:'Coal Train JL, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;text-anchor:middle"
+         id="tspan515">scribinator</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:112.89px;line-height:1.25;font-family:'Arial Black';-inkscape-font-specification:'Arial Black, Normal';letter-spacing:0px;word-spacing:0px;stroke-width:1"
+       x="11.498755"
+       y="208.79305"
+       id="text521"
+       transform="scale(1.7315011,0.57753357)"
+       inkscape:export-filename="title.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan519"
+         x="11.498755"
+         y="208.79305"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:112.89px;font-family:'Coal Train JL';-inkscape-font-specification:'Coal Train JL, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:1">1000</tspan></text>
+  </g>
+</svg>

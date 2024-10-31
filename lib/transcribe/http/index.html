@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title id="page-title"></title>
+  <link rel="stylesheet" type="text/css" href="styles/layout.css">
+  <link rel="stylesheet" type="text/css" href="styles/tooltips.css">
+  <link rel="stylesheet" type="text/css" href="styles/elements.css">
+
+  <link rel="stylesheet" type="text/css" href="styles/meta.css">
+  <link rel="stylesheet" type="text/css" href="styles/transcript.css">
+
+  <link rel="stylesheet" type="text/css" href="styles/debug.css">
+  <link rel="stylesheet" type="text/css" href="styles/results.css">
+  <link rel="stylesheet" type="text/css" href="styles/final.css">
+
+
+  <link rel="stylesheet" type="text/css" href="styles/main.css">
+</head>
+<body>
+
+<div class="header">
+  <span id="top-left"><img src="images/logo.png"></span>
+  <span class="grow" id="top-middle"><img src="images/title.png"></span>
+  <span id="top-right"><img src="images/science_of_bdsm.png"></span>
+</div>
+
+<div class="content">
+  <details open>
+    <summary>
+      <h1 class="tooltip-container">
+        Meta
+        <span
+            class="tooltip-text"
+            data-tooltip="Information about the audio source and its speakers."
+        ></span>
+      </h1>
+    </summary>
+
+    <table id="meta">
+      <tr>
+        <td class="tooltip-container">
+          Title
+          <span
+              class="tooltip-text"
+              data-tooltip="The title of the audio transcription project."
+          ></span>
+        </td>
+        <td><input type="text" id="title" width="100%"></td>
+      </tr>
+      <tr>
+        <td class="tooltip-container">
+          Description
+          <span
+              class="tooltip-text"
+              data-tooltip="A description of the audio transcription project."
+          ></span>
+        </td>
+        <td><input type="text" id="description"></td>
+      </tr>
+      <tr>
+        <td class="tooltip-container">
+          Location
+          <span
+              class="tooltip-text"
+              data-tooltip="Where the recording took place."
+          ></span>
+        </td>
+        <td><input type="text" id="location"></td>
+      </tr>
+      <tr>
+        <td class="tooltip-container">
+          When
+          <span
+              class="tooltip-text"
+              data-tooltip="When the recording took place."
+          ></span>
+        </td>
+        <td><input type="text" id="date"></td>
+      </tr>
+      <tr>
+        <td class="tooltip-container">
+          Audio
+          <span
+              class="tooltip-text"
+              data-tooltip="The complete audio."
+          ></span>
+
+        </td>
+        <td>
+          <audio controls><source src="segments/all.mp3" type="audio/mp3"></audio>
+        </td>
+      </tr>
+      <tr>
+        <td class="tooltip-container">
+          Speakers
+          <span
+              class="tooltip-text"
+              data-tooltip="A list of all speakers in order of appearance in the transcript.
+            You can change the names in the transcript by entering a comma-delimeted list here."
+          ></span>
+
+        </td>
+        <td><input type="text" id="speakers_all"></td>
+      </tr>
+    </table>
+  </details>
+  <hr/>
+  <details open>
+    <summary><h1 class="tooltip-container">
+      Transcript
+      <span
+          class="tooltip-text"
+          data-tooltip="A transcript of the audio."
+      ></span>
+    </h1></summary>
+    <div id="transcript"></div>
+  </details>
+  <hr/>
+  <details open id="results_div">
+    <summary>
+      <h1 class="tooltip-container">
+        Cache
+        <span
+            class="tooltip-text"
+            data-tooltip="Replace the cache.js file in your folder to save your edits."
+        ></span>
+      </h1>
+    </summary>
+    <p>
+      These buttons give you access to a replacement cache.js file that reflects any edits you have made so far.
+      You will find your existing cache.js file in the root of the project directory. You can replace the file or paste what you copy here.
+    </p>
+    <button class="tooltip-container" id="resultsDownloadButton">Download<span class="tooltip-text">Download a file to replace cache.js</span></button>
+    <button class="tooltip-container" id="resultsCopyButton">Copy<span class="tooltip-text">Copy to clipboard. After paste the results into cache.js</span></button>
+    <button class="tooltip-container" id="resultsShowButton">Show<span class="tooltip-text">Show or hide the contents of the replacement cache.js</span></button>
+    <pre id="results" style="display: none;"></pre>
+  </details>
+  <hr/>
+  <details open id="final_div">
+    <summary>
+      <h1 class="tooltip-container">
+        Final Transcript
+        <span
+            class="tooltip-text"
+            data-tooltip="Get the final transcript for use elsewhere."
+        ></span>
+      </h1>
+    </summary>
+    <p>
+      These buttons give you the final transcript as simple text, suitable for input into other programs.
+    </p>
+    <button class="tooltip-container" id="finalDownloadButton">Download<span class="tooltip-text">Download a text file</span></button>
+    <button class="tooltip-container" id="finalCopyButton">Copy<span class="tooltip-text">Copy the transcript to the clipboard</span></button>
+    <button class="tooltip-container" id="finalShowButton">Show<span class="tooltip-text">Show or hide the contents of the transcript</span></button>
+    <pre id="final" style="display: none;">some text</pre>
+  </details>
+  <div id="debug_div">
+    <hr/>
+    <details open>
+      <summary><h1>Debug</h1></summary>
+      <textarea id="debug"></textarea>
+    </details>
+    <hr/>
+  </div>
+  <!-- Your content goes here -->
+</div>
+
+<div class="footer">
+  <span id="bottom-left">Transcriptionator 1000</span>
+  <span class="grow" id="bottom-middle">&nbsp;</span>
+  <span id="bottom-right">by Randal</span>
+</div>
+
+
+<script src="cache.js"></script>
+<script src="scripts/main.js"></script>
+</body>
+</html>

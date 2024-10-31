@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# setup the virtual environment
+
+# should maybe just use python3 and hope it works...
+# or take it as the first argument like 3.11 and default to noda
+echo "Upgrade pip"
+python3.11 -m pip -q install pip --upgrade
+
+echo "Install virtualenv"
+python3.11 -m pip -q install virtualenv
+
+echo "Create venv"
+python3.11 -m virtualenv -q venv
+source venv/bin/activate
+
+echo "Install requirements"
+./venv/bin/pip3.11 install -q -r requirements.txt --quiet
+
+# if .env is not present,
+# get HUGGINGFACE_TOKEN=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
+# install in .env
+
+# prompt to install ffmpeg
+
+# run tests

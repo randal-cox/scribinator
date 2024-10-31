@@ -1,0 +1,10 @@
+/* Debug */
+textarea#debug {
+    width: 100%; /* Makes the textarea fill its container horizontally */
+    overflow-y: auto; /* Adds a vertical scrollbar when necessary */
+    height: 300px; /* Adjust this value as per your requirement */
+    resize: none; /* Optional: Disables resizing of textarea */
+}
+#debug_div {
+    display: none;
+}

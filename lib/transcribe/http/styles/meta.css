@@ -1,0 +1,27 @@
+
+
+/* Meta table */
+table#meta input[type="text"] {
+    font-size: 20px; /* Adjust the size as per your preference */
+}
+
+table#meta {
+  width: 100%; /* Ensures the table takes up the whole width of its parent */
+}
+
+table#meta td {
+  padding: 0 10px; /* This adds 10px padding on left and right */
+}
+
+table#meta td:nth-child(2) {
+  width: 100%; /* Causes the second column cells to take up all remaining space in the table row */
+}
+
+table#meta td input {
+  width: 100%; /* Causes all inputs in the cells to take up the full width of their parent cell */
+  box-sizing: border-box; /* Ensures the padding and border of the input field are included in its total width, and the field does not overflow its parent */
+}
+
+table#meta td:first-child {
+    font-weight: bold;
+}

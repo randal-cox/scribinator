@@ -1,0 +1,7 @@
+venv
+.env
+.idea
+audio/*
+lib/transcribe/http/segments
+lib/transcribe/http/segments.json
+lib/transcribe/http/cache.js

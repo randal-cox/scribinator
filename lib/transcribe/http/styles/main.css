@@ -1,0 +1,13 @@
+/* Results */
+button {
+    background-color: #4CAF50; /* Green background */
+    border: none; /* No borders */
+    color: white; /* White text color */
+    text-align: center; /* Center alignment for text */
+    text-decoration: none; /* No underline */
+    font-size: 20px; /* Large text size */
+    padding: 10px 20px; /* Padding around text */
+    margin: 10px 2px; /* Margin around button */
+    cursor: pointer; /* Cursor changes when hovering over button */
+    border-radius: 12px; /* Rounded corners */
+}

@@ -1,0 +1,43 @@
+/* Main structure */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+.header,
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1em;
+    border: 1px solid #ddd;
+}
+.header span,
+.footer span {
+    padding: 0 10px;
+}
+.grow {
+    flex-grow: 1;
+    text-align: center; /* for center alignment */
+}
+#top-middle img,
+#bottom-middle img {
+    max-width: 100%;
+    height: auto;
+}
+#top-left img,
+#top-right img,
+#bottom-left img,
+#bottom-right img{
+    height: 120px;
+    width: auto;
+}
+.content {
+    flex-grow: 1; /* This tells the content to fill the space */
+}
+
+summary h1 {
+  display: inline; /* Or 'inline-block', or 'flex' */
+}

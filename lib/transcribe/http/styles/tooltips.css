@@ -1,0 +1,37 @@
+.tooltip-container {
+    position: relative;
+    display: inline-block;
+    visibility: visible;
+    opacity: 1;
+}
+
+.tooltip-text {
+    visibility: hidden;
+    width: 200px; /* Adjust this according to your requirement */
+    background-color: black; /* ''#FF9E1B';*/
+    color: white;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    top: -5px;
+    left: 105%;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s linear;
+    /* Enable text wrapping within tooltip */
+    white-space: normal;
+    word-wrap: break-word;
+
+    font-size: 20px;
+}
+
+.tooltip-text::before {
+    content: attr(data-tooltip);
+}
+
+.tooltip-container:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
