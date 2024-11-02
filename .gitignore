@@ -2,6 +2,7 @@ venv*
 .env
 .idea
 audio/*
+models/*
 lib/scribinator/sources/http/segments
 lib/scribinator/sources/http/segments.json
 lib/scribinator/sources/http/cache.js
