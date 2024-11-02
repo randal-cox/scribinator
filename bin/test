@@ -1,3 +1,14 @@
 #!bash
 
-PYTHONPATH=lib:$PYTHONPATH ./venv/bin/pytest test
+#!/bin/sh
+if [ "$1" = "--runslow" ]; then
+    # run all tests
+    shift
+    PYTHONPATH=lib:$PYTHONPATH ./venv/bin/pytest "$@" test
+else
+    # run all tests but the slow ones
+    PYTHONPATH=lib:$PYTHONPATH ./venv/bin/pytest -m "not slow" "$@" test
+fi
+# you can add
+#   -m slow
+#   -vv

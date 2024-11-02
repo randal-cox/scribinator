@@ -1,13 +1,13 @@
-#!env/bin/python3
-import json, os, warnings, shutil, datetime, subprocess, platform
+import json, os, warnings, shutil, datetime, subprocess, platform, functools
 from io import BytesIO
 from typing import Dict
 
 from pydub import AudioSegment
 import torch, torchaudio
 
-from ege.logging_setup import setup_logging
+from ege.logging import setup_logging
 from ege.utils import format_elapsed_time, recursive_copy, remove_extension, greek_letters
+from .paths import Paths
 
 class Transcription:
   """
@@ -61,18 +61,32 @@ class Transcription:
   def setup_info(self) -> None:
     """Get default or supplied meta information"""
 
+    # first set up default values based on knowing nothing
     dt = datetime.datetime.fromtimestamp(
-      os.stat(self.paths['source']).st_birthtime
+      os.stat(self.paths.path('source')).st_birthtime
     ).strftime('%Y-%m-%d %H:%M:%S')
     self.info = {
-      'title': os.path.basename(self.paths['root']),
+      'title': os.path.basename(self.paths.path('root')),
       'description': f'transcription services by Scribinator 1000',
       'location': 'unknown',
-      'date': dt,
+      'author': 'unknown',
+      'when': dt,
     }
+
+    # if there is a json file with the same name as the source file, use that
+    path = remove_extension(self.paths('source')) + '.json'
+    if os.path.exists(path):
+      with open(self.paths['info'], 'r') as f:
+        self.info.update(json.load(f))
+
+    # if a json file already exists in the project, use what is there
     if os.path.exists(self.paths['info']):
       with open(self.paths['info'], 'r') as f:
         self.info.update(json.load(f))
+
+    # Finally, if there are command line switch values, use those, overriding whatever is present
+    for k in 'title,description,location,when,author'.split(','):
+      self.info['title'] = self.args[k] or self.info[k]
 
   def init_project(self) -> None:
     """Create the directory structure for the project and copy in our template"""

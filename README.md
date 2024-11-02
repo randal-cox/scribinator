@@ -11,12 +11,8 @@ in meta-information about the transcript. To support this, the UI
 gives you playback of the entire audio as well as the clips of each
 speaker's turn speaking. 
 
-# Installation
-### Clone the repo
-- `git clone https://github.com/randal-cox/scribinator`
-
-### Get the Prerequisites
-#### Hugging Face
+# Prerequisites
+## Hugging Face
 You will need a token from Hugging Face to get access to models.
 Register here
 - https://huggingface.co
@@ -27,24 +23,37 @@ Then follow these instructions to get a token
 This token is used strictly to get the models needed for running
 scribinator.
 
-#### ffmpeg
-Scribinator requires ffmpeg. Hints on how to install are at
-- https://www.hostinger.com/tutorials/how-to-install-ffmpeg
+## ffmpeg
+Scribinator requires ffmpeg. The simplest thing to do is used your built-in 
+package manager or use one of the popular ones for your platform  
 
-### Setup
+- On Ubuntu or Debian, run `sudo apt update && sudo apt install ffmpeg`
+- On Arch Linux, run `sudo pacman -S ffmpeg`
+- On MacOS using Homebrew (https://brew.sh/), run `brew install ffmpeg`
+- On Windows using Chocolatey (https://chocolatey.org/), run `choco install ffmpeg`
+- On Windows using Scoop (https://scoop.sh/), run `scoop install ffmpeg`
+
+---
+
+# Installation
+## Clone the repo
+- `git clone https://github.com/randal-cox/scribinator`
+
+
+# Setup
 When done, you can finish the setup 
 - `cd scribinator`
 - `./bin/setup`
-
-### Downloading models
-Scribinator requires local copies of several models for identifying
-speakers, transcribing audio to text, and for assigning emotion to
-text/audio. To install this, type
 - `./bin/models`
 
-This will be the only time you need network connectivity. The models will be
-stored locally in models in this project directory
+Running setup and models should be the only times you need access to the internet.
+The models script will download a local copy of the AI models needed to do all 
+subsequent work.
 
+The models are stored in the scribinator/models directory If you need to store 
+the models in some other location, you can pass this switch: `--models <dir>` 
+
+---
 # Running scribinator
 ## Command line
 transcriptionator is launched by the command-line. Assuming you
@@ -77,7 +86,7 @@ large files or for an older machine (or one with fewer cores), the
 processing can take a really long time. Be patient and watch the
 log messages for feedback.
 
-## Editing Results
+## Web Editor
 When the analysis is finished, transcriptionator will open the results 
 in your local web browser. Alternatively, you can always double-click
 the index.html file in that directory to open the UI in a web browser.
@@ -93,7 +102,7 @@ output results directory.
 ===> more coming soon about the editor
 
 
-## Security
+## Data Security
 During annotation and editing, no access to the network is required. 
 No data is transmitted off of your computer. Of course, all normal security
 considerations are still valid (e.g., a hacker could access files on your 

@@ -1,0 +1,25 @@
+#!./venv/bin/python3
+
+import argparse, sys, time, os
+import logging
+from dotenv import load_dotenv
+
+# Add lib directory to the Python path before loading the local libs
+sys.path.append(os.path.abspath('lib'))
+from scribinator.cli import cli_start, cli_end
+from scribinator.models import Models
+def main():
+    """Get local copies of the AI models used for scribinator"""
+    # pull in our env variables
+    load_dotenv()
+
+    # get the command-line arguments. WE have no special switches for this command beyond the defaults
+    parser = argparse.ArgumentParser(description="Save AI models locally")
+    cli_start(parser)
+    args, logger = cli_end(parser)
+
+    # load the models
+    Models(args).fetch()
+
+if __name__ == "__main__":
+    main()

@@ -2,7 +2,7 @@ import logging, os, sys, time, inspect, datetime
 from contextlib import contextmanager
 from functools import lru_cache
 
-from .utils import format_elapsed_time
+from .utils import format_elapsed_time, pp
 
 def human_time(seconds):
     days, seconds = divmod(seconds, 86400)
@@ -34,7 +34,7 @@ class CustomFormatter(logging.Formatter):
         level = record.levelname.ljust(5)
         indent = ' ' * getattr(record, 'indent_level', 0)  # Handle indentation
 
-        log_format = f"{time.strftime('%Y-%m-%d %H:%M:%S')} | {elapsed_time_formatted} | {level} | {indent}{record.getMessage()}"
+        log_format = f"{time.strftime('%Y-%m-%d %H:%M:%S')} | {elapsed_time_formatted} | {level:<8} | {indent}{record.getMessage()}"
         return log_format
 
 
@@ -45,6 +45,7 @@ class CustomLogger(logging.getLoggerClass()):
 
     @contextmanager
     def indent(self, name, timer=False):
+        """Create an indented section with optional timing summary"""
         start = time.time()
         self.info(name)
         self.indent_level += 2
@@ -59,6 +60,7 @@ class CustomLogger(logging.getLoggerClass()):
 
     @contextmanager
     def timer(self, name):
+        """Record how long something takes"""
         start = time.time()
         #try:
         yield
@@ -68,6 +70,7 @@ class CustomLogger(logging.getLoggerClass()):
         self.info(f'{name}: {elapsed}')
 
     def exit(self, message=None):
+        """Convenience method for exiting but recording where we exited"""
         previous_frame = inspect.currentframe().f_back
         (filename, line_number, function_name, _, _) = inspect.getframeinfo(previous_frame)
         file_name = os.path.basename(filename)
@@ -75,6 +78,11 @@ class CustomLogger(logging.getLoggerClass()):
         message = prefix if message is None else prefix + ': ' + message
         self.critical(message)
         sys.exit()
+
+    def pp(self, *structures):
+        """Run our pretty-print in logging"""
+        for line in pp(*structures, as_string=True).split("\n"):
+            self.info(line)
 
     def makeRecord(self, *args, **kwargs):
         record = super().makeRecord(*args, **kwargs)

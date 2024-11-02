@@ -1,77 +1,47 @@
 #!./venv/bin/python3
+
 import argparse, sys, time, os
 import logging
 from dotenv import load_dotenv
 
-# 1) Add lib directory to the Python path
+# Add lib directory to the Python path before loading the local libs
 sys.path.append(os.path.abspath('lib'))
+from scribinator.cli import cli_start, cli_end
+from scribinator.models import Transcription
 
-from ege.logging_setup import setup_logging
-from scribinator.transcribe import Transcription
+def main():
+    """Get local copies of the AI models used for scribinator"""
+    # pull in our env variables
+    load_dotenv()
 
-def parse_args():
-    parser = argparse.ArgumentParser(description="Audio processing for speaker diarization.")
+    ##############################
+    # parse the arguments
+    ##############################
+    parser = argparse.ArgumentParser(description="Transcribe and annotate an audio file")
+    cli_start(parser)
 
-    parser.add_argument('-r', '--reset', action='store_true', default=False, help="Recompute all files from scratch")
-
-    # Define verbosity levels
-    parser.add_argument('-q', '--quiet', action='store_const', const=0, help="Run in quiet mode (verbosity level 0).")
-    parser.add_argument('-v', '--verbose', action='count', default=0, help="Increase verbosity level (use -vv or -vvv for more).")
+    # script-specific switches
+    parser.add_argument('--title', type=str, default=None, help="The title of the audio file")
+    parser.add_argument('--description', type=str, default=None, help="A description of the audio file")
+    parser.add_argument('--location', type=str, default=None, help="Where the audio file was recorded")
+    parser.add_argument('--when', type=str, default=None, help="When the audio was recorded")
+    parser.add_argument('--author', type=str, default=None, help="Who recorder the")
 
     # Define audio files
     parser.add_argument('files', nargs='*', help="Audio files to be processed.")
 
-    args = parser.parse_args()
+    # get everything wrapped up
+    args, logger = cli_end(parser)
 
-    # Set verbosity to 1 by default if no -q or -v is specified
-    if args.quiet is not None:
-        args.verbosity = args.quiet
-    else:
-        args.verbosity = max(2, args.verbose)
-    del args.quiet
-    del args.verbose
-
-    return args
-
-def main():
-    # pull in our env variables
-    load_dotenv()
-
-    # get the command-line arguments
-    args = parse_args()
-
-    # Setup custom logger
-    global logger
-    logger = setup_logging()
-
-    # show our parameters
-    with logger.indent("Settings"):
-        for k,v in vars(args).items():
-            if k == 'files': continue
-            logger.info(f"{k + ':':<20s} {v}")
-
-
-    # Handle quiet/verbose modes
-    if args.verbosity == 0:
-        logger.setLevel(logging.CRITICAL)
-    elif args.verbosity == 1:
-        logger.setLevel(logging.WARNING)
-    elif args.verbosity == 2:
-        logger.setLevel(logging.INFO)
-    elif args.verbosity == 3:
-        logger.setLevel(logging.DEBUG)
-    else:
-        logger.setLevel(logging.INFO)
-
+    ##############################
     # process the files. If there is only one, make it a little cleaner
+    ##############################
     if len(args.files) == 1:
-        t = Transcription(args.files[0], args)
-        t.run()
+        Transcription(args.files[0], args).run()
     elif len(args.files) > 1:
         with logger.indent(f"Processing {len(args.files):,} input files"):
             for path in args.files:
-                t = Transcription(path, args)
-                t.run()
+                Transcription(path, args).run()
 
 if __name__ == "__main__":
     main()

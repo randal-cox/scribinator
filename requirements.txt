@@ -2,6 +2,7 @@ pytest
 
 project-version
 python-dotenv
+pyannotate
 
 pydub
 torch

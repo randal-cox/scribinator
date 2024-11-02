@@ -1,13 +1,7 @@
 # Back End
 ### Features
-- FRI: emotions
-- FRI: local storage of models
-
-### Code smells
-- typing
-- documentation
-- testing
-- smaller modules
+- TODO: emotions
+- IN PROGRESS: local storage of models
 
 # Front End
 ### UI
@@ -21,15 +15,12 @@
 - NOW: format final transcript
 
 # Misc
-- FRI: run on other machines
-- FRI: installation documentation in README
+- TODO: run on other machines
 - front end graphics in README
 - README folder with gfx
 - sub documents
 
 # Marketing
-- talk to the team
 - John
+- talk to the team
 - find other users
- 
-
