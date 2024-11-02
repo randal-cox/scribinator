@@ -1,6 +1,6 @@
 # Back End
 ### Features
-- TODO: emotions
+- PENDING: emotions
 - IN PROGRESS: local storage of models
 
 # Front End
@@ -10,12 +10,12 @@
 - move output buttons up top
 
 ### Output
-- NOW: accept cache.js and cache1.js
-- NOW: output to cache1.js
-- NOW: format final transcript
+- PENDING: accept cache.js and cache1.js
+- PENDING: output to cache1.js
+- PENDING: format final transcript
 
 # Misc
-- TODO: run on other machines
+- PENDING: run on other machines
 - front end graphics in README
 - README folder with gfx
 - sub documents
